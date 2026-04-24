@@ -2,6 +2,15 @@
 
 This file provides context for Claude Code when working with this repository.
 
+## IMPORTANT — Troubleshooting & Setup References
+
+**BEFORE diagnosing ANY error related to Docker, Docker Compose, WSL2, Agno/AgentOS startup, line endings, or Python deps in this repo, YOU MUST consult these files first:**
+
+- [`../TROUBLESHOOTING_DOCKER_COMPOSE.md`](../TROUBLESHOOTING_DOCKER_COMPOSE.md) — Catalog of 8 mapped errors with causes and fixes. Anti-patterns section lists known-bad routes to avoid.
+- [`../SETUP_DOCKER_COMPOSE.md`](../SETUP_DOCKER_COMPOSE.md) — The clean, validated setup path (11 steps). Use this as the reference flow; deviate only if the user requests.
+
+**Rule:** If a symptom matches an entry in TROUBLESHOOTING_DOCKER_COMPOSE.md, apply the documented fix directly — do NOT invent a new approach or re-diagnose from scratch. If you find a new error, add it to that file after resolving.
+
 ## Project Overview
 
 AgentOS - A multi-agent system built by Agno.
@@ -10,9 +19,15 @@ AgentOS - A multi-agent system built by Agno.
 
 ```
 AgentOS (app/main.py)
-├── Knowledge Agent (agents/knowledge_agent.py)  # RAG-based Q&A
+├── NoCoderSon (agents/nocoderson_agent.py)      # PT-BR tutor de IA, RAG + guardrails
+│   ├── pre-hook  agents/hooks/injection_guard.py     # deteccao de jailbreak patterns
+│   └── post-hook agents/hooks/whatsapp_formatter.py  # WhatsApp-safe + chunking (<=4 blocos)
 └── MCP Agent (agents/mcp_agent.py)              # External tools via MCP
 ```
+
+**NoCoderSon** e o agent principal voltado ao aluno NoCode StartUp. KB e carregada
+via `scripts/load_nocoderson_kb.py` a partir do export JSONL do projeto
+`knowledge-base/` (filtrado por temas didaticos + `status=active`).
 
 All agents share:
 - PostgreSQL database (pgvector) for persistence
