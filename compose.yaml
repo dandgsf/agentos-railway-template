@@ -38,7 +38,8 @@ services:
       - DB_PASS=${DB_PASS:-ai}
       - DB_DATABASE=${DB_DATABASE:-ai}
       - WAIT_FOR_DB=True
-      - PRINT_ENV_ON_LOAD=True
+      - PRINT_ENV_ON_LOAD=False
+      - CORS_ALLOW_ORIGINS=${CORS_ALLOW_ORIGINS}
       # API keys
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - WHATSAPP_ENABLED=${WHATSAPP_ENABLED:-false}

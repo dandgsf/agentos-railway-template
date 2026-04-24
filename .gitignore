@@ -59,6 +59,8 @@ Thumbs.db
 # Project-specific
 # =========================
 tmp
+nocoderson-kb-load.log
+*.kb.log
 
 # Optional: local PyPI creds (uncomment if you ever create it)
 # .pypirc
