@@ -54,8 +54,5 @@ def build_interfaces(agent: Any) -> list[Whatsapp]:
     return [
         Whatsapp(
             agent=agent,
-            access_token=getenv("WHATSAPP_ACCESS_TOKEN"),
-            phone_number_id=getenv("WHATSAPP_PHONE_NUMBER_ID"),
-            verify_token=getenv("WHATSAPP_VERIFY_TOKEN"),
         )
     ]

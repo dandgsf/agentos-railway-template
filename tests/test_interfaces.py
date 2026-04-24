@@ -30,12 +30,7 @@ class BuildInterfacesTestCase(unittest.TestCase):
             with patch("app.interfaces.Whatsapp", autospec=True) as whatsapp_cls:
                 interfaces = build_interfaces(agent="knowledge-agent")
 
-        whatsapp_cls.assert_called_once_with(
-            agent="knowledge-agent",
-            access_token="token-value",
-            phone_number_id="phone-id",
-            verify_token="verify-token",
-        )
+        whatsapp_cls.assert_called_once_with(agent="knowledge-agent")
         self.assertEqual(interfaces, [whatsapp_cls.return_value])
 
     def test_allows_signature_validation_skip_without_app_secret(self) -> None:
