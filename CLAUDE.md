@@ -19,9 +19,15 @@ AgentOS - A multi-agent system built by Agno.
 
 ```
 AgentOS (app/main.py)
-├── Knowledge Agent (agents/knowledge_agent.py)  # RAG-based Q&A
+├── NoCoderSon (agents/nocoderson_agent.py)      # PT-BR tutor de IA, RAG + guardrails
+│   ├── pre-hook  agents/hooks/injection_guard.py     # deteccao de jailbreak patterns
+│   └── post-hook agents/hooks/whatsapp_formatter.py  # WhatsApp-safe + chunking (<=4 blocos)
 └── MCP Agent (agents/mcp_agent.py)              # External tools via MCP
 ```
+
+**NoCoderSon** e o agent principal voltado ao aluno NoCode StartUp. KB e carregada
+via `scripts/load_nocoderson_kb.py` a partir do export JSONL do projeto
+`knowledge-base/` (filtrado por temas didaticos + `status=active`).
 
 All agents share:
 - PostgreSQL database (pgvector) for persistence
